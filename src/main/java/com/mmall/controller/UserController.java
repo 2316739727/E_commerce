@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private IUserService iUserService;
+
     @RequestMapping(value = "/login.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> UserLogin(String username, String password, HttpSession session){
@@ -29,23 +30,27 @@ public class UserController {
         }
         return response;
     }
+
     @RequestMapping(value = "/logout.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> logout(String username, String password, HttpSession session){
         session.removeAttribute(Const.CURRENT_USER);
         return ServerResponse.createBySuccess();
     }
+
     @RequestMapping(value = "/register.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> register(User user){
         return iUserService.register(user);
     }
+
     @RequestMapping(value = "/check_valid.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> checkValid(String str, String type){
         return iUserService.checkValid(str,type);
     }
-    @RequestMapping(value = "/check_valid.do",method = RequestMethod.POST)
+
+    @RequestMapping(value = "/get_user_info.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> getUserInfo(HttpSession session){
         User user=(User)session.getAttribute(Const.CURRENT_USER);
@@ -54,7 +59,8 @@ public class UserController {
         }
         return ServerResponse.createByErrorMessage("用户未登录，无法获取当前用户信息！");
     }
-    @RequestMapping(value = "/check_valid.do",method = RequestMethod.POST)
+
+    @RequestMapping(value = "/for_get_question.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> forGetQuestion(String username){
 

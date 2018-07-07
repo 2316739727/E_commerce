@@ -172,7 +172,7 @@
     WHERE username=#{username}
   </select>
   
-  <select id="checkAnswer"resultType="int" parameterMap="map">
+  <select id="checkAnswer" resultType="int" parameterType="map">
     select COUNT(1) from mmall_user
      WHERE username=#{username}
      and question=#{question}
@@ -182,7 +182,7 @@
   <update id="updatePasswordByUsername" parameterType="map">
     UPDATE mmall_user
     set password=#{passwordNew},update_time=now()
-    WHERE username=#{usernmae}
+    WHERE username=#{username}
   </update>
 
   <select id="checkPassword" resultType="int" parameterType="map">
